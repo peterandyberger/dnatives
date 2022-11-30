@@ -3,15 +3,24 @@ import {
   InputLabel,
   FormHelperText,
   OutlinedInput,
+  FormControlLabel,
+  Switch,
 } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect, useState } from 'react';
 import RESULT from '../Result';
+import { connect, useDispatch } from 'react-redux';
+import { addNumber, setBritish } from '../../Redux/actions';
+import config from '../../Config/config.json';
 
 const FORM = (props) => {
   const [result, setResult] = useState();
-  const [value, setValue] = useState('');
   const [valid, setValid] = useState(true);
-  const [showresult, setShowresult] = useState(false); //TODO: SHOW ONLY IF ITS MEANINGFUL
+  const [showresult, setShowresult] = useState(false);
+
+  const dispatch = useDispatch();
+
   const numbers = {
     0: 'zero',
     1: 'one',
@@ -54,8 +63,8 @@ const FORM = (props) => {
   };
 
   useEffect(() => {
-    validator(value);
-  }, [value]);
+    validator(props.value);
+  }, [props.value, props.british]);
 
   const convert = (numberString) => {
     const decimalRecursive = (num, and = false) => {
@@ -130,6 +139,17 @@ const FORM = (props) => {
       );
     };
 
+    const britishThousandRecursive = (num) => {
+      const string = [...num];
+      return (
+        numbers[string[0] + string[1]] +
+        ' ' +
+        scale[1] +
+        ' and ' +
+        decimalRecursive(num.slice(2, 4))
+      );
+    };
+
     const hundredThousandRecursive = (num) => {
       return (
         decimalRecursive(num.slice(0, 2), false) +
@@ -173,6 +193,8 @@ const FORM = (props) => {
       setResult(decimalRecursive(numberString));
     } else if (numberString < 1000) {
       setResult(hundredRecursive(numberString));
+    } else if (numberString > 1000 && numberString < 2000 && props.british) {
+      setResult(britishThousandRecursive(numberString));
     } else if (numberString < 10000) {
       setResult(thousandRecursive(numberString));
     } else if (numberString < 100000) {
@@ -184,12 +206,10 @@ const FORM = (props) => {
     }
   };
   const process = (e) => {
-    console.log('ezt processelem: ' + e);
-    setValue(e);
+    dispatch(addNumber(e));
   };
 
   const validator = (entry) => {
-    console.log('ENTRY ' + entry);
     if (entry !== '') {
       if (
         +entry === +entry &&
@@ -199,12 +219,10 @@ const FORM = (props) => {
       ) {
         setValid(true);
         setShowresult(true);
-        console.log('VALID ' + valid);
         convert(entry);
       } else {
         setValid(false);
         setShowresult(false);
-        console.log('VALID ' + valid);
       }
     } else {
       setValid(true);
@@ -223,7 +241,9 @@ const FORM = (props) => {
           {valid ? null : <div>Only digits allowed and no leading zero</div>}
         </InputLabel>
         <OutlinedInput
-          inputProps={{ maxLength: 7 }}
+          inputProps={{ maxLength: config.MAX_LENGTH }}
+          pattern="[0-9]*"
+          value={props.value}
           color="secondary"
           id="number-to-convert"
           aria-describedby="number-to-convert"
@@ -234,10 +254,34 @@ const FORM = (props) => {
             We will convert numeric input into an English phrase.
           </div>
         </FormHelperText>
+        <FormControlLabel
+          control={
+            <Switch
+              onClick={() => {
+                dispatch(setBritish(!props.british));
+              }}
+            />
+          }
+          label="British English"
+        />
       </FormControl>
       {showresult && <RESULT result={result} />}
     </>
   );
 };
 
-export default FORM;
+const mapStateToProps = (state) => {
+  return {
+    value: state.value,
+    british: state.british,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNumber: (payload) => dispatch(addNumber(payload)),
+    setBritish: (payload) => dispatch(setBritish(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FORM);
