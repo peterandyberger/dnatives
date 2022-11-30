@@ -6,8 +6,7 @@ import {
   FormControlLabel,
   Switch,
 } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useEffect, useState } from 'react';
 import RESULT from '../Result';
 import { connect, useDispatch } from 'react-redux';
@@ -234,6 +233,7 @@ const FORM = (props) => {
     <>
       <FormControl error={!valid}>
         <InputLabel
+          id="error-message"
           htmlFor="convert-input"
           error={!valid}
           style={{ padding: '10px' }}
@@ -257,6 +257,7 @@ const FORM = (props) => {
         <FormControlLabel
           control={
             <Switch
+              id="british-switch"
               onClick={() => {
                 dispatch(setBritish(!props.british));
               }}

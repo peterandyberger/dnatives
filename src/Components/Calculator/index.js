@@ -3,12 +3,8 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { addNumber } from '../../Redux/actions';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import config from '../../Config/config.json';
 
 const CALCULATOR = (props) => {
@@ -37,6 +33,7 @@ const CALCULATOR = (props) => {
       >
         <Grid item xs={1}>
           <Item
+            id="number1"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '1'));
@@ -48,6 +45,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number2"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '2'));
@@ -59,6 +57,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number3"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '3'));
@@ -78,6 +77,7 @@ const CALCULATOR = (props) => {
       >
         <Grid item xs={1}>
           <Item
+            id="number4"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '4'));
@@ -89,6 +89,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number5"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '5'));
@@ -100,6 +101,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number6"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '6'));
@@ -119,6 +121,7 @@ const CALCULATOR = (props) => {
       >
         <Grid item xs={1}>
           <Item
+            id="number7"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '7'));
@@ -130,6 +133,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number8"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '8'));
@@ -141,6 +145,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number9"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '9'));
@@ -160,6 +165,7 @@ const CALCULATOR = (props) => {
       >
         <Grid item xs={1}>
           <Item
+            id="clr"
             onClick={() => {
               dispatch(addNumber(''));
             }}
@@ -169,6 +175,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="number0"
             onClick={() => {
               if (props.value.length < config.MAX_LENGTH) {
                 dispatch(addNumber(props.value + '0'));
@@ -180,6 +187,7 @@ const CALCULATOR = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Item
+            id="back"
             onClick={() => {
               dispatch(addNumber(props.value.slice(0, -1)));
             }}
