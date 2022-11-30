@@ -251,7 +251,7 @@ const FORM = (props) => {
         />
         <FormHelperText id="my-helper-text">
           <div className="helpertext">
-            We will convert numeric input into an English phrase.
+            We will convert numeric input (max 7 digits) into an English phrase.
           </div>
         </FormHelperText>
         <FormControlLabel
