@@ -14,7 +14,7 @@ const setup = () => {
 };
 
 describe('Test numbers', () => {
-  test('testing: single number', () => {
+  test('Add_Number_Under_100_Single_Digit_decimalRecursive', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -26,8 +26,8 @@ describe('Test numbers', () => {
     expect(result.textContent).toContain('seven');
   });
 
-  test('testing: 100, algorythm logic row: 111', () => {
-    const { inputElement, britishToggle } = setup();
+  test('Add_Number_100_Or_Bigger_hundredRecursive_(algorythm logic row: 111)', () => {
+    const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
       target: { value: '100' },
@@ -37,7 +37,7 @@ describe('Test numbers', () => {
     expect(inputElement.value).toBe('100');
     expect(result.textContent).toContain('one hundred');
   });
-  test('testing: 201 algorythm logic row 78-81', () => {
+  test('Add_3_Digit_Number_Over_100_With_Single_Digit_After_A_Zero_Using_And_hundredRecursive_(algorythm_logic_row_78_81)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -48,7 +48,7 @@ describe('Test numbers', () => {
     expect(inputElement.value).toBe('201');
     expect(result.textContent).toContain('two hundred and one');
   });
-  test('testing: 19 algorythm logic row 89', () => {
+  test('Add_Number_Under_20_Without_And_and_Dash_decimalRecursive(algorythm logic row 89)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -60,30 +60,7 @@ describe('Test numbers', () => {
     expect(result.textContent).toContain('nineteen');
   });
 
-  test('testing: 30', () => {
-    const { inputElement } = setup();
-
-    fireEvent.change(inputElement, {
-      target: { value: '30' },
-    });
-
-    const result = document.getElementById('result-text');
-    expect(inputElement.value).toBe('30');
-    expect(result.textContent).toContain('thirty');
-  });
-  test('testing: 35', () => {
-    const { inputElement } = setup();
-
-    fireEvent.change(inputElement, {
-      target: { value: '35' },
-    });
-
-    const result = document.getElementById('result-text');
-    expect(inputElement.value).toBe('35');
-    expect(result.textContent).toContain('thirty-five');
-  });
-
-  test('testing: 1011 algorythm logic row 87,114', () => {
+  test('Add_Number_Over_1000_With_A_Zero_Before_Decimals_(algorythm logic row 87,114)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -95,7 +72,7 @@ describe('Test numbers', () => {
     expect(result.textContent).toContain('one thousand and eleven');
   });
 
-  test('testing: 99999 algorythm logic row: 153,200', () => {
+  test('Add_Number_Under_100000_hundredThousandRecursive_(algorythm logic row: 153,200)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -109,7 +86,7 @@ describe('Test numbers', () => {
     );
   });
 
-  test('testing: 9999999 algorythm logic row 181-182,203-204', () => {
+  test('Add_Number_Under_10000000_billionsRecursive_(algorythm logic row 181-182,203-204)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -123,7 +100,7 @@ describe('Test numbers', () => {
     );
   });
 
-  test('testing: 999999 algorythm logic row 202', () => {
+  test('Add_Number_Under_1000000_millionsRecursive_(algorythm logic row 202)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -137,7 +114,7 @@ describe('Test numbers', () => {
     );
   });
 
-  test('testing: 99999w algorythm logic row 223-224', () => {
+  test('Add_Number_With_Invalid_Character_Validator_Check_(algorythm logic row 223-224)', () => {
     const { inputElement } = setup();
 
     fireEvent.change(inputElement, {
@@ -148,7 +125,7 @@ describe('Test numbers', () => {
     expect(inputElement.value).toBe('99999w');
   });
 
-  test('testing: 1999 algorythm logic row 94,142-143,196,262', () => {
+  test('Add_Number_Between_1000_and_2000_And_Using_British_Toggle_To_Convert_Differently_(tealgorythm logic row 94,142-143,196,262)', () => {
     const { inputElement, britishToggle } = setup();
 
     fireEvent.change(inputElement, {
